@@ -1,0 +1,37 @@
+--- a/sound/soc/codecs/rt5670.c
++++ b/sound/soc/codecs/rt5670.c
+@@ -2934,6 +2934,18 @@
+ 						 RT5670_GPIO1_IS_IRQ |
+ 						 RT5670_JD_MODE1),
+ 	},
++	{
++		.callback = rt5670_quirk_cb,
++		.ident = "NEC Versapro VT-J",
++		.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "NEC"),
++			DMI_MATCH(DMI_PRODUCT_FAMILY, "LaVie/VersaPro"),
++		},
++		.driver_data = (unsigned long *)(RT5670_DMIC_EN |
++						 RT5670_DMIC1_IN2P |
++						 RT5670_GPIO1_IS_IRQ |
++						 RT5670_JD_MODE1),
++	},
+ 	{
+ 		.callback = rt5670_quirk_cb,
+		.ident = "Lenovo Thinkpad Tablet 10",
+--- a/sound/soc/intel/common/soc-acpi-intel-byt-match.c
++++ b/sound/soc/intel/common/soc-acpi-intel-byt-match.c
+@@ -44,6 +44,13 @@
+ 			DMI_MATCH(DMI_PRODUCT_VERSION, "ThinkPad 8"),
+ 		},
+ 	},
++	{
++		.callback = byt_rt5672_quirk_cb,
++		.matches = {
++			DMI_MATCH(DMI_SYS_VENDOR, "NEC"),
++			DMI_MATCH(DMI_PRODUCT_FAMILY, "LaVie/VersaPro"),
++		},
++	},
+ 	{
+ 		.callback = byt_rt5672_quirk_cb,
+		.matches = {
